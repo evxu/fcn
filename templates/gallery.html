@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        body {font-family:Calibri;}
+    </style>
+</head>
+<body>
+<table>
+{% for image in images %}
+<tr>
+  <td><a href='{{image[0]}}'><img src='{{image[0]}}'></img></a></td>
+  {% if score %}
+  <td>{{image[1]}}</td>
+  {% endif %}
+</tr>
+{% endfor %}
+</table>
+</body>
+
+
+<body>
+
