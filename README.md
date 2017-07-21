@@ -12,4 +12,5 @@ Annotation in FCN training data accelerates classifier learning process. And cla
 Recommand to use picpac config "max_size=300" or "max_size=400". High-resolution images are not good training data in FCN, and could make training process extremely slow.
 
 #### validation
-`python fcn-val.py --model_snapshot_directory/100000 --out output_dir --db test_db`
+`python fcn-val.py --model_snapshot_directory/100000 --out output_dir --db test_db --fraction 512`
+`python cls-val.py --model_snapshot_directory/100000 --out output_dir --db test_db`
