@@ -171,7 +171,7 @@ def main (_):
                 perturb=True,
                 shuffle=True,
                 reshuffle=True,
-                #max_size = 400,
+                max_size = 300,
                 #resize_width=256,
                 #resize_height=256,
                 batch=1,
@@ -181,6 +181,8 @@ def main (_):
                 pert_color1=10,
                 pert_color2=10,
                 pert_color3=10,
+                pert_min_scale = 0.8,
+                pert_max_scale = 1.2,
                 channels=FLAGS.channels,
                 #mixin = FLAGS.mixin,
                 stratify=True,
@@ -191,21 +193,16 @@ def main (_):
                 round_div = stride,
                 annotate='json',
                 mixin_group_delta=1,
-                pert_min_scale = 0.4,	# 
-                pert_max_scale = 0.6,
 		)
     picpac_config_fcn.update(picpac_config_shared)
     if FLAGS.mixin_fcn:
         picpac_config_fcn['mixin'] = FLAGS.mixin_fcn
 
-    picpac_config_cls = dict(
-                pert_min_scale = 0.8,
-                pert_max_scale = 1.2,
-		)
-    picpac_config_cls.update(picpac_config_shared)
+    picpac_config_cls = picpac_config_shared
+    # picpac_config_cls.update(picpac_config_shared)
     if FLAGS.mixin_cls:
         picpac_config_cls['mixin'] = FLAGS.mixin_cls
-    print(picpac_config_cls)
+    # print(picpac_config_cls)
 
     stream_fcn = picpac.ImageStream(FLAGS.db_fcn, **picpac_config_fcn)
     stream_cls = picpac.ImageStream(FLAGS.db_cls, **picpac_config_cls)
