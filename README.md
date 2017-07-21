@@ -13,4 +13,5 @@ Recommand to use picpac config "max_size=300" or "max_size=400". High-resolution
 
 #### validation
 `python fcn-val.py --model_snapshot_directory/100000 --out output_dir --db test_db --fraction 512`
+
 `python cls-val.py --model_snapshot_directory/100000 --out output_dir --db test_db`
