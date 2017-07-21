@@ -154,13 +154,7 @@ def main (_):
                 annotate='json',
                 channels=FLAGS.channels,
                 stratify=True,
-                pert_color1=20,
-                pert_angle=20,
-                pert_min_scale=0.4,
-                pert_max_scale=0.6,
                 #pad=False,
-                pert_hflip=True,
-                pert_vflip=True,
                 channel_first=False # this is tensorflow specific
                                     # Caffe's dimension order is different.
                 )
@@ -195,7 +189,3 @@ def main (_):
 
 if __name__ == '__main__':
     tf.app.run()
-
-# python fcn-val.py --db bag_style.test --model ./model/160000 --out val_bag_style --max 500
-
-# python fcn-val.py --db true-bags --model ./model/160000 --out val_bag_ids --max 500

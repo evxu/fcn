@@ -78,15 +78,27 @@ flags.DEFINE_integer('channels', 3, '')  # changed from 1 to 3  --Evelyn
 flags.DEFINE_integer('max', 100, '')
 flags.DEFINE_string('name', 'logits_cls:0', '')
 flags.DEFINE_integer('max_size', None, '')
+flags.DEFINE_string('out', 'val/out', '')
+
+
+def save(path, images):
+    image = images[0,:,:,:]
+    cv2.imwrite(path, image)
 
 
 
 def main (_):
     assert FLAGS.db and os.path.exists(FLAGS.db)
 
-    stream = picpac.ImageStream(FLAGS.db, channel_first=False, perturb=False, loop=False, channels=FLAGS.channels)
+    stream = picpac.ImageStream(FLAGS.db, 
+        max_size=300,
+        channel_first=False, 
+        perturb=False, 
+        loop=False, 
+        channels=FLAGS.channels)
 
-
+    gal = Gallery(FLAGS.out, score=True)
+    cc = 0
     with Model(FLAGS.model, name=FLAGS.name, prob=True) as model:
         for images, _, _ in stream:
             #print(images.shape)
@@ -95,11 +107,13 @@ def main (_):
             #images *= 3000 /(2000-800)
             probs = model.apply(images)
             print(probs)
+            save(gal.next(score=probs[0]), images)
+            
+            cc += 1
+            if FLAGS.max and cc>= FLAGS.max:
+                break
+    gal.flush(rank=True)
     pass
 
 if __name__ == '__main__':
     tf.app.run()
-
-# python fcn-val.py --db bag_style.test --model ./model/160000 --out val_bag_style --max 500
-
-# python fcn-val.py --db true-bags --model ./model/160000 --out val_bag_ids --max 500
