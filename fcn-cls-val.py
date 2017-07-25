@@ -86,7 +86,7 @@ class Model:
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-flags.DEFINE_string('db', 'db', '')
+flags.DEFINE_string('db', 'dbtest', '')
 flags.DEFINE_string('model', 'model', 'Directory to put the training data.')
 flags.DEFINE_integer('channels', 3, '')  # changed from 1 to 3  --Evelyn
 flags.DEFINE_integer('patch', None, '')
@@ -94,7 +94,7 @@ flags.DEFINE_string('out', None, '')
 flags.DEFINE_integer('max', 100, '')
 flags.DEFINE_string('name', 'logits:0', '')
 flags.DEFINE_float('cth', 0.5, '')
-flags.DEFINE_float('fraction', 256, 'fraction of the number of pixels')
+flags.DEFINE_float('fraction', 512, 'fraction of the number of pixels')
 flags.DEFINE_integer('stride', 1, '')
 flags.DEFINE_integer('max_size', None, '')
 
